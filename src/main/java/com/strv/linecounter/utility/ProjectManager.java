@@ -19,8 +19,8 @@ import java.util.List;
 
 public class ProjectManager {
 
-    public static AnalyzeEntity analyzeProject(Project project, Integer maxFileLines, Integer maxMethodLines) {
-        AnalyzeEntity entity = new AnalyzeEntity();
+    public static AnalyzeEntity analyzeProject(final Project project, final Integer maxFileLines, final Integer maxMethodLines) {
+        final AnalyzeEntity entity = new AnalyzeEntity();
 
         for (VirtualFile file : ProjectRootManager.getInstance(project).getContentSourceRoots()) {
             VfsUtilCore.visitChildrenRecursively(file, new VirtualFileVisitor() {
@@ -32,7 +32,6 @@ public class ProjectManager {
                             return super.visitFile(file);
                         if ((StringUtils.countMatches(psiFile.getText(), "\n") + 1) > maxFileLines)
                             entity.addClass(new ClassEntity(psiFile));
-
 
                         List<PsiMethod> methodList = new ArrayList<>();
                         for (PsiClass psiClass : ((PsiJavaFile) psiFile).getClasses()) {
@@ -59,13 +58,12 @@ public class ProjectManager {
     }
 
 
-    public static int getMethodStartLineNumber(Project project, @NotNull PsiMethod method) {
+    public static int getMethodStartLineNumber(@NotNull Project project, @NotNull PsiMethod method) {
         if (method.getNameIdentifier() == null)
             return 0;
 
         int offset = method.getNameIdentifier().getTextOffset();
-        final PsiDocumentManager manager = PsiDocumentManager.getInstance(project);
-        Document document = manager.getDocument(method.getContainingFile());
+        Document document = PsiDocumentManager.getInstance(project).getDocument(method.getContainingFile());
         if (document != null)
             return document.getLineNumber(offset);
         else

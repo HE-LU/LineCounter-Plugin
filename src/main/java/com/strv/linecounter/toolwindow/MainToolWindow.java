@@ -16,9 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class MainToolWindow extends JFrame implements ToolWindowFactory {
     private ToolWindow mToolWindow;
@@ -46,9 +44,12 @@ public class MainToolWindow extends JFrame implements ToolWindowFactory {
             setTreeClickListener(tree);
 
             if (findButton != null && tree != null && methodField != null && classField != null) {
-                findButton.addActionListener(e -> {
-                    refreshContent(tree, Integer.valueOf(classField.getText()), Integer.valueOf(methodField.getText()));
-                    scrollPanel.updateUI();
+                findButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        refreshContent(tree, Integer.valueOf(classField.getText()), Integer.valueOf(methodField.getText()));
+                        scrollPanel.updateUI();
+                    }
                 });
             }
         }
@@ -93,7 +94,7 @@ public class MainToolWindow extends JFrame implements ToolWindowFactory {
     }
 
 
-    private void setTreeClickListener(JTree tree) {
+    private void setTreeClickListener(final JTree tree) {
         tree.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 try {
@@ -133,7 +134,7 @@ public class MainToolWindow extends JFrame implements ToolWindowFactory {
                 PsiMethod psiMethod = (PsiMethod) entity.getObject();
                 vf = psiMethod.getContainingFile().getVirtualFile();
                 int line = ProjectManager.getMethodStartLineNumber(mProject, psiMethod);
-                new OpenFileDescriptor(mProject, vf, line).navigate(true);
+                new OpenFileDescriptor(mProject, vf, line, 0).navigate(true);
                 break;
         }
     }
