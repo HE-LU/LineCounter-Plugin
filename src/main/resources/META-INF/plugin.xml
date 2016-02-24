@@ -1,0 +1,27 @@
+<idea-plugin version="2">
+    <id>com.strv.linecounter</id>
+    <name>LineCounter</name>
+    <version>1.0</version>
+    <vendor email="hermann@helu.cz" url="http://www.strv.com">STRV</vendor>
+
+    <description><![CDATA[
+      Plugin will display list of files and methods which have bigger number of lines than user defined value.
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Version 1.0 - first version
+    ]]>
+    </change-notes>
+
+
+    <!-- please see http://www.jetbrains.org/intellijry/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="135.1286" until-build="143.1821.5"/>
+
+    <depends>com.intellij.modules.all</depends>
+
+    <!--Here you can register toolwindows.-->
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Line Counter" secondary="false" icon="/drawable/icon.png" anchor="right"
+                    factoryClass="com.strv.linecounter.toolwindow.MainToolWindow"/>
+    </extensions>
+</idea-plugin>
