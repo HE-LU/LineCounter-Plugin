@@ -10,9 +10,15 @@ plugins {
     id "org.jetbrains.intellij" version "0.0.40"
 }
 
-intellij {
-    version 'IC-14.1.5'
-    pluginName 'LineCounter-release'
+allprojects {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    intellij {
+        version 'IC-14.1.5'
+        pluginName 'LineCounter-release'
+        updateSinceUntilBuild false
+    }
 }
 
 apply plugin: 'idea'
