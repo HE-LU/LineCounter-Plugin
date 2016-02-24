@@ -39,19 +39,19 @@ public class CustomTreeCellRenderer extends JLabel implements TreeCellRenderer {
 
         switch (entity.getTreeNodeType()) {
             case ROOT:
-                setFont(new Font("Arial", Font.BOLD, DimensionManager.fontSize(DimensionManager.FONT_MEDIUM_LARGE)));
+                setFont(new Font("Arial", Font.BOLD, DimensionManager.fontSize(DimensionManager.FONT_SMALL)));
                 setForeground(EditorColorsManager.getInstance().getGlobalScheme().getDefaultForeground());
                 setText(entity.getText());
                 setIcon(new ImageIcon(getResourceBufferedImage("drawable/folder.png")));
                 break;
             case FILES_CATEGORY:
-                setFont(new Font("Arial", Font.BOLD, DimensionManager.fontSize(DimensionManager.FONT_MEDIUM)));
+                setFont(new Font("Arial", Font.BOLD, DimensionManager.fontSize(DimensionManager.FONT_SMALL)));
                 setForeground(EditorColorsManager.getInstance().getGlobalScheme().getDefaultForeground());
                 setText(entity.getText() + " (" + entity.getValue() + ")");
                 setIcon(new ImageIcon(getResourceBufferedImage("drawable/folder.png")));
                 break;
             case METHODS_CATEGORY:
-                setFont(new Font("Arial", Font.BOLD, DimensionManager.fontSize(DimensionManager.FONT_MEDIUM)));
+                setFont(new Font("Arial", Font.BOLD, DimensionManager.fontSize(DimensionManager.FONT_SMALL)));
                 setForeground(EditorColorsManager.getInstance().getGlobalScheme().getDefaultForeground());
                 setText(entity.getText() + " (" + entity.getValue() + ")");
                 setIcon(new ImageIcon(getResourceBufferedImage("drawable/folder.png")));

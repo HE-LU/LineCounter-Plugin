@@ -37,6 +37,7 @@ public class UIManager {
         tree.setCellRenderer(new CustomTreeCellRenderer());
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setRootVisible(false);
+        tree.setRowHeight(DimensionManager.reDimension(20));
 
         final JBScrollPane contentScrollPanel = new JBScrollPane(tree, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         contentScrollPanel.setName("contentScrollPanel");

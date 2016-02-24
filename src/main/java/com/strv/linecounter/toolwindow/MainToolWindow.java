@@ -15,8 +15,10 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.event.*;
+import java.util.Enumeration;
 
 public class MainToolWindow extends JFrame implements ToolWindowFactory {
     private ToolWindow mToolWindow;
@@ -116,6 +118,10 @@ public class MainToolWindow extends JFrame implements ToolWindowFactory {
                     itemClicked(path);
                 } catch (Exception ex) {//exception
                 }
+                else if (e.getButton() == MouseEvent.BUTTON3) try {
+                    itemRightClicked(tree, path);
+                } catch (Exception ex) {//exception
+                }
             }
         });
     }
@@ -136,6 +142,38 @@ public class MainToolWindow extends JFrame implements ToolWindowFactory {
                 int line = ProjectManager.getMethodStartLineNumber(mProject, psiMethod);
                 new OpenFileDescriptor(mProject, vf, line, 0).navigate(true);
                 break;
+        }
+    }
+
+    private void itemRightClicked(final JTree tree, TreePath path) {
+        TreeNodeEntity entity = ((TreeNodeEntity) ((DefaultMutableTreeNode) path.getLastPathComponent()).getUserObject());
+
+        if (entity.getTreeNodeType().equals(TreeNodeTypeEnum.ROOT) ||
+                entity.getTreeNodeType().equals(TreeNodeTypeEnum.METHODS_CATEGORY) ||
+                entity.getTreeNodeType().equals(TreeNodeTypeEnum.FILES_CATEGORY) ||
+                entity.getTreeNodeType().equals(TreeNodeTypeEnum.FILES_NODE)) {
+            if (tree.isExpanded(path))
+                expandAlll(tree, path, false);
+            else
+                expandAlll(tree, path, true);
+        }
+    }
+
+    private void expandAlll(JTree tree, TreePath parent, boolean expand) {
+        TreeNode node = (TreeNode) parent.getLastPathComponent();
+
+        if (expand)
+            tree.expandPath(parent);
+
+        if (node.getChildCount() > 0) {
+            for (Enumeration e = node.children(); e.hasMoreElements(); ) {
+                TreeNode n = (TreeNode) e.nextElement();
+                TreePath path = parent.pathByAddingChild(n);
+                expandAlll(tree, path, expand);
+            }
+
+            if (!expand)
+                tree.collapsePath(parent);
         }
     }
 }
