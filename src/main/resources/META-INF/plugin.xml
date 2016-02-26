@@ -1,14 +1,15 @@
 <idea-plugin version="2">
     <id>com.strv.linecounter</id>
     <name>LineCounter</name>
-    <version>1.0</version>
+    <version>1.1</version>
     <vendor email="hermann@helu.cz" url="http://www.strv.com">STRV</vendor>
 
     <description><![CDATA[
-      Plugin will display list of files and methods which have bigger number of lines than user defined value.
+      Purpose of this plugin is to display list of files and methods that have more lines than user specified.<br>This can be specially useful when you want to refactor your code.
     ]]></description>
 
     <change-notes><![CDATA[
+      Version 1.1 - updated icons & description<br>
       Version 1.0 - first version
     ]]>
     </change-notes>
