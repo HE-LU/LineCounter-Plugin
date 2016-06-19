@@ -9,6 +9,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
 import com.intellij.ui.components.JBScrollPane;
 import com.strv.linecounter.entity.*;
+import com.strv.linecounter.utility.Properties;
 import com.strv.linecounter.utility.ProjectManager;
 import com.strv.linecounter.utility.UIManager;
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +50,11 @@ public class MainToolWindow extends JFrame implements ToolWindowFactory {
                 findButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        // Set default values
+                        Properties prefs = new Properties();
+                        prefs.setRowsMethod(methodField.getText());
+                        prefs.setRowsClass(classField.getText());
+
                         refreshContent(tree, Integer.valueOf(classField.getText()), Integer.valueOf(methodField.getText()));
                         scrollPanel.updateUI();
                     }

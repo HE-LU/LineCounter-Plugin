@@ -57,6 +57,7 @@ public class UIManager {
 
 
     private static JPanel createHeaderPanel() {
+        Properties prefs = new Properties();
         final JPanel headerPanel = new JPanel();
         headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.X_AXIS));
 
@@ -64,7 +65,7 @@ public class UIManager {
         methodLabel.setFont(new Font("Ariel", Font.BOLD, DimensionManager.fontSize(11)));
         methodLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        final JTextField methodField = new JTextField("100");
+        final JTextField methodField = new JTextField(prefs.getRowsMethod());
         methodField.setFont(new Font("Ariel", Font.BOLD, DimensionManager.fontSize(11)));
         methodField.setHorizontalAlignment(SwingConstants.CENTER);
         methodField.setName("methodField");
@@ -78,7 +79,7 @@ public class UIManager {
         classLabel.setFont(new Font("Ariel", Font.BOLD, DimensionManager.fontSize(11)));
         classLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        final JTextField classField = new JTextField("1000");
+        final JTextField classField = new JTextField(prefs.getRowsClass());
         classField.setFont(new Font("Ariel", Font.BOLD, DimensionManager.fontSize(11)));
         classField.setHorizontalAlignment(SwingConstants.CENTER);
         classField.setName("classField");
